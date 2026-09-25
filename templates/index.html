@@ -1,0 +1,47 @@
+{% load static %}<!-- Permite que o template encontre os arquivos estaticos-->
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema Biblioteca</title>
+    
+    <link rel = "stylesheet" href={% static 'css/style.css' %}>
+
+</head>
+   
+
+
+<body>
+
+<header>
+
+<h1>Sistema Biblioteca</h1>
+<p>Bem vindo ao sistema de gerencia de Biblioteca.</p>
+</header>
+    
+<main>
+    <h2>Menu Principal</h2>
+
+    <div class="menu">
+
+         <a href="/usuarios/" class="card">
+            <h3>Usuarios</h3>
+            <p>Gerenciar usuarios da biblioteca</p>
+        </a>
+
+         <a href="/livros/" class="card">
+            <h3>Livros</h3>
+            <p>Gerenciar livros da biblioteca</p>
+        </a>
+
+         <a href="/emprestimos/" class="card">
+            <h3>Empréstimos</h3>
+            <p>Gerenciar empréstimos da biblioteca</p>
+        </a>
+         
+    </div>
+</main>
+           
+</body>
+</html>
