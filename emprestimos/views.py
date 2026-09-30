@@ -13,4 +13,4 @@ def relatorio_emprestimos(request):
         'usuarios': Usuario.objects.all(),
         'emprestimos': Emprestimo.objects.all(),
     }
-    return render(request, 'emprestimos/relatorio.html', contexto)
+    return render(request, 'index.html', contexto)
