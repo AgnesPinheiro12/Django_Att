@@ -1,0 +1,85 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel da Biblioteca</title>
+    <!-- Mapeando o CSS específico do app emprestimos -->
+    <link rel="stylesheet" href="{% static 'emprestimos/css/style.css' %}">
+</head>
+<body>
+
+    <header>
+        <div class="container">
+            <h1>📚 Sistema Biblioteca - Painel Geral</h1>
+            <nav>
+                <!-- Links rápidos para navegar entre os módulos do sistema -->
+                <a href="{% url 'livros:lista_livros' %}">Ver Livros</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <h2>Dashboard de Controle</h2>
+        
+        <div class="dashboard-grid">
+            
+            <!-- 📊 Bloco 1: Empréstimos Ativos -->
+            <section class="painel-secao">
+                <h3>🔄 Empréstimos Realizados</h3>
+                <div class="lista-itens">
+                    <ul>
+                        {% for emprestimo in emprestimos %}
+                            <li>
+                                <strong>ID:</strong> #{{ emprestimo.id }} <br>
+                                <span><strong>Livro:</strong> {{ emprestimo.livro }}</span> <br>
+                                <span><strong>Usuário:</strong> {{ emprestimo.usuario }}</span>
+                            </li>
+                        {% empty %}
+                            <li class="vazio">Nenhum empréstimo ativo.</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </section>
+
+            <!-- 📚 Bloco 2: Livros Disponíveis -->
+            <section class="painel-secao">
+                <h3>📖 Livros no Catálogo</h3>
+                <div class="lista-itens">
+                    <ul>
+                        {% for livro in livros %}
+                            <li>
+                                <strong>{{ livro.titulo }}</strong>
+                                <span>Autor: {{ livro.autor }}</span>
+                            </li>
+                        {% empty %}
+                            <li class="vazio">Nenhum livro cadastrado.</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </section>
+
+            <!-- 👥 Bloco 3: Usuários Cadastrados -->
+            <section class="painel-secao">
+                <h3>👥 Usuários Registrados</h3>
+                <div class="lista-itens">
+                    <ul>
+                        {% for usuario in usuarios %}
+                            <li>
+                                <!-- ⚠️ Ajuste 'nome' se o campo no seu models de Usuário for diferente -->
+                                <strong>{{ usuario.nome }}</strong>
+                                <span>ID Usuário: #{{ usuario.id }}</span>
+                            </li>
+                        {% empty %}
+                            <li class="vazio">Nenhum usuário cadastrado.</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </section>
+
+        </div>
+    </main>
+
+</body>
+</html>

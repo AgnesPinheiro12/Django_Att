@@ -1,0 +1,45 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Módulo de Usuários</title>
+    <!-- Vinculando o CSS específico do app usuarios -->
+    <link rel="stylesheet" href="{% static 'usuarios/css/style.css' %}">
+</head>
+<body>
+
+    <header>
+        <div class="container">
+            <h1>👥 Sistema Biblioteca - Módulo Usuários</h1>
+            <nav>
+                <!-- CORRIGIDO: Agora aponta para a página inicial correta do seu projeto -->
+                <a href="{% url 'index' %}">Ir para o Painel Geral</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <h2>Leitores Cadastrados</h2>
+        
+        <div class="lista-usuarios">
+            <ul>
+                <!-- O Django vai rodar este loop usando a lista de usuários vinda da sua View -->
+                {% for usuario in usuarios %}
+                    <li>
+                        <!-- ⚠️ Verifique se o campo no seu models.py se chama 'nome' e 'email' -->
+                        <strong>Nome:</strong> {{ usuario.nome }} <br>
+                        <span><strong>E-mail:</strong> {{ usuario.email }}</span> <br>
+                        <small>Matrícula / ID: #{{ usuario.id }}</small>
+                    </li>
+                {% empty %}
+                    <!-- Exibido caso não exista nenhum usuário cadastrado no banco -->
+                    <li class="vazio">Nenhum leitor ou usuário cadastrado no sistema ainda.</li>
+                {% endfor %}
+            </ul>
+        </div>
+    </main>
+
+</body>
+</html>

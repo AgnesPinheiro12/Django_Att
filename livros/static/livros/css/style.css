@@ -1,5 +1,5 @@
 /* ==========================================================================
-   Variáveis Globais e Paleta de Cores (Amarelo em Destaque)
+   Variáveis Globais e Paleta de Cores (Herdadas do seu Projeto)
    ========================================================================== */
 :root {
   --primary: #FFAC00;          /* Amarelo / Ouro Principal */
@@ -38,40 +38,61 @@ body {
   flex-direction: column;
 }
 
+/* Container de Alinhamento */
+.container {
+  width: 90%;
+  max-width: 1050px;
+  margin: 0 auto;
+}
+
 /* ==========================================================================
-   Header / Cabeçalho (Amarelo Principal)
+   Header / Cabeçalho
    ========================================================================== */
 header {
   background: var(--bg-body);
-  color: var(--dark-green);
-  text-align: center;
-  padding: 45px 20px;
+  padding: 30px 0;
   border-bottom: 5px solid var(--dark-green);
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
 }
 
+header .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
 header h1 {
-  font-size: 2.5rem;
+  font-size: 2rem;
   font-weight: 800;
   letter-spacing: -0.5px;
-  margin-bottom: 8px;
   color: var(--primary);
 }
 
-header p {
-  font-size: 1.1rem;
-  color: var(--dark-green);
+/* Botão de Voltar estilizado */
+header nav a {
+  display: inline-block;
+  text-decoration: none;
+  background-color: var(--dark-green);
+  color: var(--white);
+  padding: 10px 20px;
+  border-radius: var(--radius);
   font-weight: 600;
-  max-width: 600px;
-  margin: 0 auto;
+  font-size: 0.95rem;
+  transition: var(--transition);
+}
+
+header nav a:hover {
+  background-color: var(--primary-hover);
+  color: var(--text-main);
+  transform: translateY(-2px);
 }
 
 /* ==========================================================================
    Main / Conteúdo Principal
    ========================================================================== */
 main {
-  width: 90%;
-  max-width: 1050px;
   margin: 50px auto;
   flex: 1;
 }
@@ -81,10 +102,8 @@ main h2 {
   font-size: 1.8rem;
   color: var(--dark-green);
   margin-bottom: 35px;
-  position: relative;
 }
 
-/* Linha decorativa amarela abaixo do título */
 main h2::after {
   content: '';
   display: block;
@@ -96,34 +115,29 @@ main h2::after {
 }
 
 /* ==========================================================================
-   Menu & Grid de Cards
+   Grid de Cards de Livros (Customizado para a Lista)
    ========================================================================== */
-.menu {
+.lista-livros ul {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 25px;
-  justify-content: center;
+  list-style: none;
 }
 
-/* Card Individual */
-.card {
+/* Card Individual de Livro */
+.lista-livros li {
   background-color: var(--white);
-  padding: 30px 25px;
-  text-decoration: none;
-  color: var(--text-main);
+  padding: 25px;
   border-radius: var(--radius);
   border: 1px solid rgba(255, 172, 0, 0.35);
   box-shadow: var(--shadow-card);
   transition: var(--transition);
   position: relative;
   overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
 }
 
-/* Topo do card com gradiente amarelo/dourado */
-.card::before {
+/* Linha decorativa no topo do card */
+.lista-livros li::before {
   content: '';
   position: absolute;
   top: 0;
@@ -134,54 +148,47 @@ main h2::after {
   transition: var(--transition);
 }
 
-.card h3 {
-  font-size: 1.35rem;
-  margin-bottom: 12px;
+/* Títulos dos Livros */
+.lista-livros strong {
   color: var(--dark-green);
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  transition: var(--transition);
+  font-size: 1.1rem;
 }
 
-.card p {
+/* Informações do Autor e Detalhes */
+.lista-livros span {
+  display: block;
+  margin-top: 8px;
   font-size: 0.95rem;
   color: var(--text-sub);
-  line-height: 1.5;
 }
 
-/* Botão/Seta de ação */
-.card::after {
-  content: 'Acessar →';
-  display: inline-block;
-  margin-top: 20px;
-  font-size: 0.9rem;
-  font-weight: 700;
-  color: var(--dark-green);
-  transition: var(--transition);
+/* Estado Vazio (Mensagem quando não há livros) */
+.lista-livros li.vazio {
+  grid-column: 1 / -1;
+  text-align: center;
+  color: var(--text-sub);
+  background-color: transparent;
+  border: 2px dashed rgba(255, 172, 0, 0.4);
+  box-shadow: none;
+  padding: 40px;
+}
+
+.lista-livros li.vazio::before {
+  display: none;
 }
 
 /* ==========================================================================
-   Hover / Interações
+   Hover / Interações nos Cards de Livros
    ========================================================================== */
-.card:hover {
-  transform: translateY(-8px);
+.lista-livros li:not(.vazio):hover {
+  transform: translateY(-5px);
   box-shadow: var(--shadow-hover);
   border-color: var(--primary);
 }
 
-.card:hover::before {
+.lista-livros li:not(.vazio):hover::before {
   height: 8px;
   background: linear-gradient(90deg, var(--primary), var(--accent-lightgreen));
-}
-
-.card:hover h3 {
-  color: #172c14;
-}
-
-.card:hover::after {
-  color: var(--primary-hover);
-  transform: translateX(6px);
 }
 
 /* ==========================================================================
@@ -189,11 +196,16 @@ main h2::after {
    ========================================================================== */
 @media (max-width: 600px) {
   header {
-    padding: 35px 15px;
+    padding: 20px 0;
+  }
+  
+  header .container {
+    flex-direction: column;
+    text-align: center;
   }
   
   header h1 {
-    font-size: 1.8rem;
+    font-size: 1.6rem;
   }
   
   main {

@@ -1,0 +1,188 @@
+/* ==========================================================================
+   Variáveis Globais e Paleta de Cores
+   ========================================================================== */
+:root {
+  --primary: #FFAC00;          
+  --primary-hover: #e09700;    
+  --accent-yellow: #FFEB4C;    
+  --accent-lightgreen: #B8D66A;
+  --dark-green: #376230;       
+  --white: #FFFFFF;            
+  
+  --bg-body: #faf8f2;          
+  --text-main: #232a21;        
+  --text-sub: #5c635a;         
+  
+  --shadow-card: 0 4px 16px rgba(255, 172, 0, 0.15);
+  --shadow-hover: 0 12px 28px rgba(255, 172, 0, 0.30);
+  --radius: 12px;
+  --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+/* ==========================================================================
+   Reset & Tipografia
+   ========================================================================== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  background-color: var(--bg-body);
+  color: var(--text-main);
+  line-height: 1.6;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.container {
+  width: 95%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* ==========================================================================
+   Header / Cabeçalho
+   ========================================================================== */
+header {
+  background: var(--bg-body);
+  padding: 30px 0;
+  border-bottom: 5px solid var(--dark-green);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+header .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+header h1 {
+  font-size: 2rem;
+  font-weight: 800;
+  color: var(--primary);
+}
+
+header nav a {
+  display: inline-block;
+  text-decoration: none;
+  background-color: var(--dark-green);
+  color: var(--white);
+  padding: 10px 20px;
+  border-radius: var(--radius);
+  font-weight: 600;
+  transition: var(--transition);
+}
+
+header nav a:hover {
+  background-color: var(--primary-hover);
+  color: var(--text-main);
+  transform: translateY(-2px);
+}
+
+/* ==========================================================================
+   Main e Grid Responsivo do Dashboard
+   ========================================================================== */
+main {
+  margin: 50px auto;
+  flex: 1;
+}
+
+main h2 {
+  text-align: center;
+  font-size: 1.8rem;
+  color: var(--dark-green);
+  margin-bottom: 35px;
+}
+
+main h2::after {
+  content: '';
+  display: block;
+  width: 60px;
+  height: 4px;
+  background-color: var(--primary);
+  border-radius: 2px;
+  margin: 10px auto 0 auto;
+}
+
+/* Organiza as 3 grandes colunas */
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 30px;
+}
+
+/* Cada uma das 3 grandes seções */
+.painel-secao {
+  background-color: var(--white);
+  padding: 25px;
+  border-radius: var(--radius);
+  border: 1px solid rgba(255, 172, 0, 0.35);
+  box-shadow: var(--shadow-card);
+  border-top: 6px solid var(--primary);
+}
+
+.painel-secao h3 {
+  font-size: 1.3rem;
+  color: var(--dark-green);
+  margin-bottom: 20px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid #f0ede4;
+}
+
+/* Lista interna de itens de cada coluna */
+.lista-itens ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.lista-itens li {
+  background-color: #faf9f5;
+  padding: 15px;
+  border-radius: 8px;
+  border-left: 4px solid var(--dark-green);
+  transition: var(--transition);
+}
+
+.lista-itens li:not(.vazio):hover {
+  background-color: var(--white);
+  transform: translateX(4px);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+}
+
+.lista-itens strong {
+  color: var(--text-main);
+}
+
+.lista-itens span {
+  font-size: 0.9rem;
+  color: var(--text-sub);
+}
+
+.lista-itens li.vazio {
+  border-left: 4px solid #ccc;
+  color: var(--text-sub);
+  font-style: italic;
+  background-color: transparent;
+}
+
+/* ==========================================================================
+   Responsividade
+   ========================================================================== */
+@media (max-width: 768px) {
+  header .container {
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  main {
+    margin: 30px auto;
+  }
+}

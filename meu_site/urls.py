@@ -4,9 +4,12 @@ from .views import index
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('emprestimos.urls')),  # página inicial -> painel da biblioteca
+    
+    # 📌 Rotas dos seus Apps (Organizadas por caminho único)
+    path('emprestimos/', include('emprestimos.urls')),  # Mudado de '' para 'emprestimos/' para liberar a home
     path('livros/', include('livros.urls')),
     path('usuarios/', include('usuarios.urls')),
-    path('', index, name='index'),  # página inicial -> index.html
+    
+    # 🏠 Página Inicial Única do Site todo (Cai no seu index.html geral)
+    path('', index, name='index'),  
 ]
-
